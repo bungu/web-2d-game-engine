@@ -11,7 +11,6 @@ export const DEFAULT_MOUSE_DATA: MouseData = {
 export interface GameObject {
 	start: () => void;
 	update: (time: Time, game: Game) => void;
-	draw: (ctx: CanvasRenderingContext2D, time: Time, game: Game) => void;
 	destroy: () => void;
 	z?: number;
 }
@@ -122,8 +121,12 @@ class Game {
 		this.time.tick();
 
 		for (let i = 0; i <  this.scene.objects.length; i++) {
-			this.scene.objects[i].update(this.time, this);
-			this.scene.objects[i].draw(this.ctx, this.time, this);
+			const object = this.scene.objects[i];
+			object.update(this.time, this);
+
+			if ((object as any).$drawable) {
+				(object as any).draw(this.ctx, this.time, this);
+			}
 		}
 		
 		this.mouse.up = false;

@@ -1,14 +1,3 @@
-// export function extend(Child: any, Parent: any){
-// 	var F = function () { };
-// 	F.prototype = Parent.prototype;
-// 	var f = new F() as any;
-
-// 	for (var prop in Child.prototype) f[prop] = Child.prototype[prop];
-// 	Child.prototype = f;
-// 	Child.prototype.super = Parent.prototype;
-// }
-
-
 export type Vector2 = {
 	x: number;
 	y: number;

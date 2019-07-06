@@ -1,18 +1,20 @@
 import Game, { Scene, GameObject } from './core/Game';
 import { Vector2 } from './helpers';
 import Time from './core/Time';
+import { Drawable } from './components/drawable';
 
 window.addEventListener('load', () => {
 	const game = new Game();
 
 	const tileset = document.getElementById('tileset') as HTMLImageElement;
 
-	class Box implements GameObject {
-		private position: Vector2 = {
+	class Box implements GameObject, Drawable {
+		public $drawable = true;
+		public position: Vector2 = {
 			x: 0,
 			y: 0,
 		};
-		private size: Vector2 = {
+		public size: Vector2 = {
 			x: 16,
 			y: 16,
 		};
