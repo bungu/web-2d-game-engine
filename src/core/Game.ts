@@ -1,5 +1,5 @@
 import Time from './Time';
-import { Vector2 } from 'src/helpers';
+import { Vector2 } from 'src/components/vector2';
 
 export const DEFAULT_MOUSE_DATA: MouseData = {
 	position: { x: 0, y: 0 },

@@ -1,5 +1,5 @@
 import Game, { Scene, GameObject } from './core/Game';
-import { Vector2 } from './helpers';
+import { Vector2 } from './components/vector2';
 import Time from './core/Time';
 import { Drawable } from './components/drawable';
 

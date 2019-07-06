@@ -1,4 +1,4 @@
-import { Vector2 } from "src/helpers";
+import { Vector2 } from "src/components/vector2";
 import Game from "src/core/Game";
 import Time from "src/core/Time";
 
