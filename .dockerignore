@@ -1,0 +1,6 @@
+.awcache/
+dist/
+node_modules/
+.DS_Store/
+.git/
+Dockerfile
