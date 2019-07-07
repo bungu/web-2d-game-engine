@@ -3,9 +3,41 @@ import { Vector2 } from './helpers';
 import Time from './core/Time';
 import { Drawable } from './components/drawable';
 
-function start(mymod: typeof import('../wasm/pkg/wasm')) {
+import { ctx } from './initContext';
+
+function start({ Universe }: typeof import('../wasm/pkg/wasm')) {
     console.log("All modules loaded");
-    mymod.greet('victor');
+
+	// Construct the universe, and get its width and height.
+	const universe = Universe.new(
+		64,
+		64,
+		[
+			{ x: 50, y: 13, size: 30, color: 0x2255aa, speed_x: 1, speed_y: 0 },
+			{ x: 4, y: 5, size: 60, color: 0x993310, speed_x: 0, speed_y: -1 },
+		]
+	);
+
+	const drawCells = () => {
+
+		ctx.beginPath();
+
+		universe.new_draw();
+
+		ctx.stroke();
+	};
+
+	const renderLoop = () => {
+		universe.tick();
+
+		drawCells();
+
+		requestAnimationFrame(renderLoop);
+	};
+
+	drawCells();
+	requestAnimationFrame(renderLoop);
+
 }
 
 async function load() {
