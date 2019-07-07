@@ -23,26 +23,29 @@ module.exports = {
 		path: resolve(__dirname, '../../dist/public'),
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.ts', '.tsx'],
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.wasm'],
 		modules: [
 			resolve(__dirname, '../../src'),
+			resolve(__dirname, '../../wasm'),
 			'node_modules',
 		],
 	},
 	module: {
-		rules: [{
-			test: /\.(j|t)sx?$/,
-			use: [{
-				loader: 'awesome-typescript-loader',
-				options: {
-					useCahce: true,
-					forceIsolatedModules: true,
-					reportFiles: ["src/**/*.{ts,tsx}"],
-					silent: true,
-				},
-			}, ],
-			exclude: /node_modules/,
-		}, ],
+		rules: [
+			{
+				test: /\.(j|t)sx?$/,
+				use: [{
+					loader: 'awesome-typescript-loader',
+					options: {
+						useCahce: true,
+						forceIsolatedModules: true,
+						reportFiles: ['src/**/*.{ts,tsx}'],
+						silent: true,
+					},
+				}],
+				exclude: /(node_modules|wasm$)/,
+			},
+		],
 	},
 	plugins: [
 		new webpack.NamedModulesPlugin(),
@@ -77,6 +80,13 @@ module.exports = {
 					test: /node_modules/,
 					chunks: "initial",
 					name: "vendor",
+					priority: 10,
+					enforce: true,
+				},
+				wasm: {
+					test: /wasm$/,
+					chunks: "initial",
+					name: "wasm",
 					priority: 10,
 					enforce: true,
 				},

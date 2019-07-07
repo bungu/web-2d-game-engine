@@ -11,7 +11,7 @@ module.exports = {
 	target: 'node',
 	context: resolve(__dirname),
 	entry: {
-		server: resolve(__dirname, '../../src/server/index.tsx')
+		server: resolve(__dirname, '../../src/server/index.ts')
 	},
 	output: {
 		filename: '[name].js',

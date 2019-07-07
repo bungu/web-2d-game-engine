@@ -3,6 +3,18 @@ import { Vector2 } from './helpers';
 import Time from './core/Time';
 import { Drawable } from './components/drawable';
 
+function start(mymod: typeof import('../wasm/pkg/wasm')) {
+    console.log("All modules loaded");
+    mymod.greet('victor');
+}
+
+async function load() {
+    start(await import('../wasm/pkg/wasm'));
+}
+
+load();
+
+
 window.addEventListener('load', () => {
 	const game = new Game();
 
@@ -23,7 +35,7 @@ window.addEventListener('load', () => {
 			y: 1,
 		};
 
-		public start() {}
+		public start() {	}
 
 		public update(_time: Time, game: Game) {
 			const border: Vector2 = {

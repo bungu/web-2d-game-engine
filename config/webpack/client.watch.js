@@ -23,26 +23,32 @@ module.exports = {
 		path: resolve(__dirname, '../../dist/public'),
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.ts', '.tsx'],
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.wasm'],
 		modules: [
 			resolve(__dirname, '../../src'),
 			'node_modules',
 		],
 	},
 	module: {
-		rules: [{
-			test: /\.(j|t)sx?$/,
-			use: [{
-				loader: 'awesome-typescript-loader',
-				options: {
-					useCahce: true,
-					forceIsolatedModules: true,
-					reportFiles: ["src/**/*.{ts,tsx}"],
-					silent: true,
-				},
-			}, ],
-			exclude: /node_modules/,
-		}, ],
+		rules: [
+			{
+				test: /\.(j|t)sx?$/,
+				use: [{
+					loader: 'awesome-typescript-loader',
+					options: {
+						useCahce: true,
+						forceIsolatedModules: true,
+						reportFiles: ['src/**/*.{ts,tsx}'],
+						silent: true,
+					},
+				}],
+				exclude: /node_modules/,
+			},
+			{
+				test: /\.wasm$/,
+				type: 'webassembly/experimental',
+			},
+		],
 	},
 	plugins: [
 		new webpack.NamedModulesPlugin(),
